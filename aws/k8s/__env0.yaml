@@ -4,7 +4,8 @@ deploy:
   steps:
     terraformPlan:
       before:
-        - /opt/tfenv/bin/terraform state rm module.my-cluster.module.eks.module.eks.kubernetes_config_map.aws_auth
+#        - /opt/tfenv/bin/terraform state rm module.my-cluster.module.eks.module.eks.kubernetes_config_map.aws_auth
+        - /opt/tfenv/bin/terraform state rm module.my-cluster.module.autoscaler.module.eks-cluster-autoscaler.helm_release.cluster_autoscaler
 
 destroy:
   steps:
