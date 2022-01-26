@@ -5,3 +5,9 @@ deploy:
     terraformPlan:
       before:
         - /opt/tfenv/bin/terraform state rm module.my-cluster.module.eks.module.eks.kubernetes_config_map.aws_auth
+
+destroy:
+  steps:
+    terraformPlan:
+      before:
+        - /opt/tfenv/bin/terraform state rm module.my-cluster.module.eks.module.eks.kubernetes_config_map.aws_auth
