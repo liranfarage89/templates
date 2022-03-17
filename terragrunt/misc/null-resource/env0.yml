@@ -1,0 +1,8 @@
+
+version: 1
+
+deploy:
+  steps:
+    terraformInit:
+      before:
+        - curl https://api.github.com/repos/gruntwork-io/terragrunt/tags\?per_page\=1000 
