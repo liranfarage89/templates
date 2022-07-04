@@ -5,5 +5,8 @@ generate "null_resource" {
 resource "null_resource" "null" {
   count=2
 }
+output default_region {
+	value = "dummy output"
+}
 EOF
 }
