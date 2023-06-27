@@ -7,5 +7,5 @@ deploy:
         use: https://github.com/env0/env0-checkov-plugin
         inputs:
           directory: .
-          flags: --framework terraform
+          flags: --framework terraform --use-enforcement-rules --bc-api-key $API_KEY --skip-check HIGH
 
