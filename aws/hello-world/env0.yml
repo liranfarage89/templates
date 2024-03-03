@@ -12,7 +12,7 @@ deploy:
           inputs:
             version: v1.28.0
             directory: .
-            flags: --force-all-dirs --tfvars-file=env0.auto.tfvars
-#        - name: Upload json file to s3
-#          run: aws s3 cp /tmp/output.json s3://hack2024-tfsec-outputs/${ENV0_ENVIRONMENT_ID}/${ENV0_DEPLOYMENT_LOG_ID}/output.json
+            flags: --force-all-dirs --tfvars-file=env0.auto.tfvars -O output.json --soft-fail --format=json
+        - name: Upload json file to s3
+          run: aws s3 cp output.json s3://hack2024-tfsec-outputs/${ENV0_ENVIRONMENT_ID}/${ENV0_DEPLOYMENT_LOG_ID}/output.json
 
