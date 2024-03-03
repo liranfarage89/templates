@@ -2,11 +2,11 @@ version: 2
 deploy:
   steps:
     terraformInit:
-      #before:
-        #- echo Replacing !!!USER!!! with $USER in index.html
-        #- sed 's/!!!USER!!!/'"$USER"'/g' index.template.html > index.html
-    #terraformPlan:
       before:
+        - name: index.html update
+          run: |
+            echo Replacing !!!USER!!! with $USER in index.html
+            sed 's/!!!USER!!!/'"$USER"'/g' index.template.html > index.html
         - name: Run TfSec # The name that will be presented in the UI for this step
           use: https://github.com/env0/env0-tfsec-plugin
           inputs:
