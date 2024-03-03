@@ -7,10 +7,12 @@ deploy:
         - sed 's/!!!USER!!!/'"$USER"'/g' index.template.html > index.html
     terraformPlan:
       before:
-        - name: run TfSec # The name that will be presented in the UI for this step
+        - name: Run TfSec # The name that will be presented in the UI for this step
           use: https://github.com/env0/env0-tfsec-plugin
           inputs:
             version: v1.28.0
             directory: .
-            flags: --force-all-dirs
+            flags: --force-all-dirs --format=json --out=output.json
+        - name: Upload json file to s3
+          run: aws s3 cp output.json s3://hack2024-tfsec-outputs/${ENV0_ENVIRONMENT_ID}/${ENV0_DEPLOYMENT_LOG_ID}/output.json
 
