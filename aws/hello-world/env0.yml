@@ -15,7 +15,7 @@ deploy:
             flags: --force-all-dirs --tfvars-file=env0.auto.tfvars -O output.json --soft-fail --format=json
         - name: Add env0 info to output.json
           run: |
-            jq '. + { orgId: env.ENV0_ORGANIZATION_ID, templateRepository: env.ENV0_TEMPLATE_REPOSITORY, revision: env.ENV0_DEPLOYMENT_REVISION}' output.json > output2.json
+            jq '. + { orgId: env.ENV0_ORGANIZATION_ID, templateRepository: env.ENV0_TEMPLATE_REPOSITORY, commitHash: env.ENV0_COMMIT_HASH }' output.json > output2.json
         - name: Upload json file to s3
           run: aws s3 cp output2.json s3://hack2024-tfsec-outputs/${ENV0_ENVIRONMENT_ID}/${ENV0_DEPLOYMENT_LOG_ID}.json
 
