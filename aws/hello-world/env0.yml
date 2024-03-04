@@ -1,8 +1,21 @@
-version: 1
-
+version: 2
 deploy:
   steps:
     terraformInit:
       before:
-        - echo Replacing !!!USER!!! with $USER in index.html
-        - sed 's/!!!USER!!!/'"$USER"'/g' index.template.html > index.html
+#        - name: index.html update
+#          run: |
+#            echo Replacing !!!USER!!! with $USER in index.html
+#            sed 's/!!!USER!!!/'"$USER"'/g' index.template.html > index.html
+        - name: Run TfSec # The name that will be presented in the UI for this step
+          use: https://github.com/env0/env0-tfsec-plugin
+          inputs:
+            version: v1.28.0
+            directory: .
+            flags: --force-all-dirs --tfvars-file=env0.auto.tfvars -O output.json --soft-fail --format=json
+        - name: Add env0 info to output.json
+          run: |
+            jq '. + { orgId: env.ENV0_ORGANIZATION_ID, templateRepository: env.ENV0_TEMPLATE_REPOSITORY, commitHash: env.ENV0_COMMIT_HASH }' output.json > output2.json
+        - name: Upload json file to s3
+          run: aws s3 cp output2.json s3://hack2024-tfsec-outputs/${ENV0_ENVIRONMENT_ID}/${ENV0_DEPLOYMENT_LOG_ID}.json
+
