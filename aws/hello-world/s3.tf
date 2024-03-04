@@ -15,11 +15,6 @@ resource "aws_s3_bucket" "website_bucket" {
   }
 }
 
-resource "aws_s3_bucket" "website_bucket2" {
-  bucket = "hello-env0-${random_string.random.result}-another"
-  force_destroy = true
-}
-
 resource "aws_s3_bucket_website_configuration" "website_config" {
   bucket = aws_s3_bucket.website_bucket.id
 
