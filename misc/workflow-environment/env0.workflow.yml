@@ -9,7 +9,7 @@ environments:
     workspace: 'rootService2'
   middleService1:
     name: middleService1
-    templateName: 'null-a-error'
+    templateName: 'null-a'
     workspace: 'middleService1'
     needs:
       - rootService1
