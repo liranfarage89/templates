@@ -24,7 +24,7 @@ resource "helm_release" "vault_release" {
   // Configuration reference in
   // https://www.vaultproject.io/docs/platform/k8s/helm/configuration
   values = [
-    "${file("vault-config.yaml")}"
+file("vault-config.yaml")
   ]
 
   set {
