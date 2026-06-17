@@ -3,14 +3,17 @@ environments:
     name: rootService1
     templateName: 'null-a'
     workspace: 'rootService1'
+    requiresApproval: true
   rootService2:
     name: rootService2
     templateName: 'null-a'
     workspace: 'rootService2'
+    requiresApproval: true
   middleService1:
     name: middleService1
     templateName: 'null-a'
     workspace: 'middleService1'
+    requiresApproval: true
     needs:
       - rootService1
       - rootService2
@@ -18,6 +21,7 @@ environments:
     name: middleService2
     templateName: 'null-a'
     workspace: 'middleService2'
+    requiresApproval: true
     needs:
       - rootService1
       - rootService2
